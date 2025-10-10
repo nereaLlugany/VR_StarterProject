@@ -22,8 +22,6 @@ namespace Autohand.Demo{
         }
 
         public void Shoot() {
-            
-            Debug.Log("Hola1");
             //Play the audio sound
             if(shootSound)
                 AudioSource.PlayClipAtPoint(shootSound, transform.position, shootVolume);
@@ -31,9 +29,7 @@ namespace Autohand.Demo{
             RaycastHit hit;
             if(Physics.Raycast(barrelTip.position, barrelTip.forward, out hit, range, layer)){
                 var hitBody = hit.transform.GetComponent<Rigidbody>();
-                if(hitBody != null)
-                {
-                    Debug.Log("Hola");
+                if(hitBody != null) {
                     Debug.DrawRay(barrelTip.position, (hit.point - barrelTip.position), Color.green, 5);
                     hitBody.GetComponent<Smash>()?.DoSmash();
                     hitBody.AddForceAtPosition((hit.point - barrelTip.position).normalized*hitPower*10, hit.point, ForceMode.Impulse);
