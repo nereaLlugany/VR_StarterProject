@@ -8,6 +8,8 @@ namespace Autohand{
     
     public class PhysicsGadgetButton : PhysicsGadgetConfigurableLimitReader{
         public SceneControllerMenu controller;
+        public AudioSource audioSource;      // Assigna un AudioSource al botó
+        public AudioClip pressSound; 
         bool pressed = false;
 
         [Tooltip("The percentage (0-1) from the required value needed to call the event, if threshold is 0.1 OnPressed will be called at 0.9, and OnUnpressed at 0.1"), Min(0.01f)]
@@ -44,6 +46,10 @@ namespace Autohand{
         public void Pressed() {
             
             controller.StartCountdown();
+            
+            if (audioSource != null && pressSound != null)
+                audioSource.PlayOneShot(pressSound);
+            
             pressed = true;
             pressedValue = GetValue();
             pressedPos = transform.localPosition;
