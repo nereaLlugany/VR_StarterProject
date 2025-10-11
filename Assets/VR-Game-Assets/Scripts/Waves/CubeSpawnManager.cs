@@ -1,32 +1,23 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
 public class CubeSpawnManager : MonoBehaviour
 {
-    [Header("Spawn points")]
-    public Transform[] spawnPoints;
-
-    [Header("Prefabs")]
+    [Header("Prefabs (només GunCube i SwordCube)")]
     public GameObject gunCubePrefab;
     public GameObject swordCubePrefab;
 
-    [Header("Waves")]
-    public Wave[] waves;
-    private int currentWave = 0;
-    private float waveTimer = 0f;
-    private float totalTime = 0f;
+    [Header("References")]
+    public WaveManager waveManager;
 
-    private float spawnTimer = 0f;
-    private float nextSpawnInterval = 2f;
-
-    [Header("UI Progress Bar")]
+    [Header("UI Progress")]
     public Image progressBarFill;
     public Image progressBarOutline;
-
-    [Header("UI Text")]
     public TMP_Text textTime;
+
+    [Header("Wave colors (optional)")]
     public Color[] waveFillColors = new Color[] {
         new Color(0.2f, 0.8f, 0.2f), // green
         new Color(0.2f, 0.6f, 1f),   // blue
@@ -35,85 +26,25 @@ public class CubeSpawnManager : MonoBehaviour
         new Color(0.7f, 0.2f, 1f)    // purple
     };
 
-    private float totalElapsed = 0f;
-    private const float MAX_TOTAL_SECONDS = 300f;
+    private float spawnTimer = 0f;
+    private float nextSpawnInterval = 2f;
 
     private List<GameObject> activeCubes = new List<GameObject>();
 
+    private float totalElapsed = 0f;
+    private const float MAX_TOTAL_SECONDS = 300f;
+
     void Start()
     {
-        if (waves == null || waves.Length == 0)
+        if (waveManager == null)
         {
-            waves = new Wave[5];
-
-            waves[0] = new Wave
-            {
-                waveName = "Wave 1 - Intro",
-                duration = 60f,
-                minSpawnInterval = 3.0f,
-                maxSpawnInterval = 4.0f,
-                allowGun = true,
-                allowSword = false,
-                maxSimultaneous = 3,
-                maxSpawnPerTick = 1,
-                speedMultiplier = 0.8f,
-                introduceSpecialCubes = false
-            };
-            waves[1] = new Wave
-            {
-                waveName = "Wave 2 - Combo",
-                duration = 60f,
-                minSpawnInterval = 2.0f,
-                maxSpawnInterval = 3.0f,
-                allowGun = true,
-                allowSword = true,
-                maxSimultaneous = 6,
-                maxSpawnPerTick = 2,
-                speedMultiplier = 1.0f,
-                introduceSpecialCubes = false
-            };
-            waves[2] = new Wave
-            {
-                waveName = "Wave 3 - Faster + Specials",
-                duration = 60f,
-                minSpawnInterval = 1.2f,
-                maxSpawnInterval = 2.0f,
-                allowGun = true,
-                allowSword = true,
-                maxSimultaneous = 8,
-                maxSpawnPerTick = 2,
-                speedMultiplier = 1.25f,
-                introduceSpecialCubes = true
-            };
-            waves[3] = new Wave
-            {
-                waveName = "Wave 4 - Intense",
-                duration = 60f,
-                minSpawnInterval = 0.9f,
-                maxSpawnInterval = 1.6f,
-                allowGun = true,
-                allowSword = true,
-                maxSimultaneous = 10,
-                maxSpawnPerTick = 3,
-                speedMultiplier = 1.5f,
-                introduceSpecialCubes = true
-            };
-            waves[4] = new Wave
-            {
-                waveName = "Wave 5 - Finale",
-                duration = 60f,
-                minSpawnInterval = 0.6f,
-                maxSpawnInterval = 1.2f,
-                allowGun = true,
-                allowSword = true,
-                maxSimultaneous = 12,
-                maxSpawnPerTick = 3,
-                speedMultiplier = 1.8f,
-                introduceSpecialCubes = true
-            };
+            Debug.LogError("CubeSpawnManager: waveManager no assignat a l'Inspector!");
+            enabled = false;
+            return;
         }
 
-        nextSpawnInterval = Random.Range(waves[currentWave].minSpawnInterval, waves[currentWave].maxSpawnInterval);
+        Wave w = waveManager.GetCurrentWave();
+        nextSpawnInterval = Random.Range(w.minSpawnInterval, w.maxSpawnInterval);
 
         if (progressBarFill != null)
         {
@@ -121,38 +52,40 @@ public class CubeSpawnManager : MonoBehaviour
             progressBarFill.fillMethod = Image.FillMethod.Horizontal;
             progressBarFill.fillOrigin = (int)Image.OriginHorizontal.Left;
             progressBarFill.fillAmount = 1f;
-            progressBarFill.color = GetColorForWave(currentWave);
+            progressBarFill.color = GetColorForWave(waveManager.GetCurrentWaveIndex());
         }
-
         if (progressBarOutline != null)
-            progressBarOutline.color = DarkenColor(GetColorForWave(currentWave), 0.5f);
+            progressBarOutline.color = DarkenColor(GetColorForWave(waveManager.GetCurrentWaveIndex()), 0.5f);
 
-        if (textTime != null)
-            textTime.text = "00:00:00";
+        if (textTime != null) textTime.text = "00:00:000";
     }
 
     void Update()
     {
-        if (spawnPoints == null || spawnPoints.Length == 0) return;
+        if (waveManager == null) return;
 
-        Wave w = waves[currentWave];
+        Wave w = waveManager.GetCurrentWave();
 
         spawnTimer += Time.deltaTime;
-        waveTimer += Time.deltaTime;
-
-        if (totalElapsed < MAX_TOTAL_SECONDS)
-            totalElapsed += Time.deltaTime;
-
+        if (totalElapsed < MAX_TOTAL_SECONDS) totalElapsed += Time.deltaTime;
         UpdateElapsedText(totalElapsed);
 
-        float remaining = Mathf.Clamp01(1f - (waveTimer / Mathf.Max(0.0001f, w.duration)));
+        float waveElapsed = waveManager.GetWaveElapsed();
+        float waveDur = waveManager.GetWaveDuration();
+        float remaining = waveDur > 0f ? Mathf.Clamp01(1f - (waveElapsed / waveDur)) : 0f;
         UpdateWaveProgressUI(remaining);
+
+        if (progressBarFill != null)
+        {
+            progressBarFill.color = GetColorForWave(waveManager.GetCurrentWaveIndex());
+        }
+        if (progressBarOutline != null)
+            progressBarOutline.color = DarkenColor(GetColorForWave(waveManager.GetCurrentWaveIndex()), 0.5f);
 
         if (spawnTimer >= nextSpawnInterval)
         {
             spawnTimer = 0f;
             nextSpawnInterval = Random.Range(w.minSpawnInterval, w.maxSpawnInterval);
-
             int allowedToSpawn = Mathf.Max(0, w.maxSimultaneous - activeCubes.Count);
             int spawnThisTick = Mathf.Min(w.maxSpawnPerTick, allowedToSpawn);
 
@@ -161,31 +94,11 @@ public class CubeSpawnManager : MonoBehaviour
                 SpawnOne(w);
             }
         }
-
-        if (waveTimer >= w.duration)
-        {
-            currentWave++;
-            if (currentWave >= waves.Length)
-                currentWave = waves.Length - 1;
-
-            waveTimer = 0f;
-            Wave nw = waves[currentWave];
-            nextSpawnInterval = Random.Range(nw.minSpawnInterval, nw.maxSpawnInterval);
-
-            Color newFillColor = GetColorForWave(currentWave);
-            if (progressBarFill != null)
-            {
-                progressBarFill.color = newFillColor;
-                progressBarFill.fillAmount = 1f;
-            }
-            if (progressBarOutline != null)
-                progressBarOutline.color = DarkenColor(newFillColor, 0.5f);
-        }
     }
 
     private void SpawnOne(Wave w)
     {
-        Transform sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        bool makeSpecial = w.introduceSpecialCubes && Random.value <= w.specialChance;
 
         List<GameObject> candidates = new List<GameObject>();
         if (w.allowGun && gunCubePrefab != null) candidates.Add(gunCubePrefab);
@@ -194,15 +107,39 @@ public class CubeSpawnManager : MonoBehaviour
         if (candidates.Count == 0) return;
 
         GameObject prefab = candidates[Random.Range(0, candidates.Count)];
-        GameObject inst = Instantiate(prefab, sp.position, sp.rotation);
 
+        Transform spawnPoint = waveManager.ChooseSpawnPointForType(prefab == gunCubePrefab ? "gun" : "sword",
+                                                                    prefab == gunCubePrefab ? w.gunSidePreference : w.swordSidePreference);
+
+        Vector3 spawnPos = (spawnPoint != null) ? spawnPoint.position : Vector3.zero;
+        Quaternion spawnRot = (spawnPoint != null) ? spawnPoint.rotation : Quaternion.identity;
+
+        GameObject inst = Instantiate(prefab, spawnPos, spawnRot);
         activeCubes.Add(inst);
 
         CubePhysics cp = inst.GetComponent<CubePhysics>();
         if (cp != null)
         {
-            cp.SetSpeedMultiplier(w.speedMultiplier);
+            float globalMul = waveManager.GetGlobalSpeedMultiplier();
+            cp.SetSpeedMultiplier(w.speedMultiplier * globalMul);
             cp.cubeSpawnManager = this;
+        }
+
+        if (makeSpecial)
+        {
+            SpecialCube sc = inst.GetComponent<SpecialCube>();
+            if (sc == null) sc = inst.AddComponent<SpecialCube>();
+
+            int specialType = Random.Range(0, 3);
+            sc.ConfigureSpecial(specialType, waveManager.specialIcons != null && waveManager.specialIcons.Length > specialType ? waveManager.specialIcons[specialType] : null, waveManager);
+        }
+        else
+        {
+            SpecialCube sc = inst.GetComponent<SpecialCube>();
+            if (sc != null)
+            {
+                sc.ClearVisual();
+            }
         }
     }
 
@@ -212,10 +149,7 @@ public class CubeSpawnManager : MonoBehaviour
         activeCubes.Remove(cube);
     }
 
-    public int GetActiveCubeCount()
-    {
-        return activeCubes.Count;
-    }
+    public int GetActiveCubeCount() { return activeCubes.Count; }
 
     private void UpdateWaveProgressUI(float normalizedRemaining)
     {
@@ -223,20 +157,20 @@ public class CubeSpawnManager : MonoBehaviour
             progressBarFill.fillAmount = Mathf.Clamp01(normalizedRemaining);
     }
 
-private void UpdateElapsedText(float elapsedSeconds)
-{
-    if (textTime == null) return;
+    private void UpdateElapsedText(float elapsedSeconds)
+    {
+        if (textTime == null) return;
 
-    float clampedSeconds = Mathf.Clamp(elapsedSeconds, 0f, MAX_TOTAL_SECONDS);
+        float clampedSeconds = Mathf.Clamp(elapsedSeconds, 0f, MAX_TOTAL_SECONDS);
 
-    int minutes = (int)(clampedSeconds / 60f);
-    int seconds = (int)(clampedSeconds % 60f);
+        int minutes = (int)(clampedSeconds / 60f);
+        int seconds = (int)(clampedSeconds % 60f);
 
-    float fractional = clampedSeconds - Mathf.Floor(clampedSeconds);
-    int milliseconds = Mathf.FloorToInt(fractional * 1000f);
+        float fractional = clampedSeconds - Mathf.Floor(clampedSeconds);
+        int milliseconds = Mathf.FloorToInt(fractional * 1000f);
 
-    textTime.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
-}
+        textTime.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
+    }
 
     private Color GetColorForWave(int waveIndex)
     {
@@ -250,18 +184,4 @@ private void UpdateElapsedText(float elapsedSeconds)
         factor = Mathf.Clamp01(factor);
         return new Color(c.r * (1f - factor), c.g * (1f - factor), c.b * (1f - factor), c.a);
     }
-}
-
-public class Wave
-{
-    public string waveName = "Wave";
-    public float duration = 20f;
-    public float minSpawnInterval = 1.0f;
-    public float maxSpawnInterval = 3.0f;
-    public bool allowGun = true;
-    public bool allowSword = false;
-    public int maxSimultaneous = 5;
-    public int maxSpawnPerTick = 1;
-    public float speedMultiplier = 1.0f;
-    public bool introduceSpecialCubes = false;
 }

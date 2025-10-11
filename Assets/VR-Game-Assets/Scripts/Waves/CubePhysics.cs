@@ -6,23 +6,50 @@ public class CubePhysics : MonoBehaviour
     public float baseSpeed = 2.5f;
 
     public float speedMultiplier = 1.0f;
+
     public CubeSpawnManager cubeSpawnManager;
+
     Rigidbody rb;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            Debug.LogWarning($"{name} no té Rigidbody - afegeix-ne un per moure el cub.");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     void FixedUpdate()
     {
-        Vector3 desiredVelocity = transform.forward * baseSpeed * speedMultiplier;
+        if (rb == null) return;
+
+        float globalMul = 1f;
+        if (cubeSpawnManager != null)
+        {
+            var wmField = cubeSpawnManager.GetType().GetField("waveManager");
+            WaveManager wm = null;
+            try
+            {
+                wm = cubeSpawnManager.waveManager;
+            }
+            catch
+            {
+                wm = null;
+            }
+
+            if (wm != null)
+            {
+                globalMul = wm.GetGlobalSpeedMultiplier();
+            }
+        }
+
+        Vector3 desiredVelocity = transform.forward * baseSpeed * speedMultiplier * globalMul;
         rb.velocity = desiredVelocity;
     }
 
@@ -30,14 +57,22 @@ public class CubePhysics : MonoBehaviour
     {
         if (other.CompareTag("CubeKiller"))
         {
-            // Notificar manager i destruir
-            if (cubeSpawnManager != null) cubeSpawnManager.NotifyCubeDestroyed(gameObject);
-            Destroy(gameObject);
+            NotifyAndDestroy();
             return;
         }
+
+        if (other.CompareTag("Player"))
+        {
+            SpecialCube sc = GetComponent<SpecialCube>();
+            if (sc != null)
+            {
+                sc.Activate();
+                return;
+            }
+        }
+
         if (other.CompareTag("Bullet"))
         {
-            // destruir la bala i reproduir l'explosió
             Destroy(other.gameObject);
 
             CubeExplode ce = GetComponent<CubeExplode>();
@@ -47,9 +82,7 @@ public class CubePhysics : MonoBehaviour
             }
             else
             {
-                // si no hi ha CubeExplode, fem una destrucció bàsica
-                if (cubeSpawnManager != null) cubeSpawnManager.NotifyCubeDestroyed(gameObject);
-                Destroy(gameObject);
+                NotifyAndDestroy();
             }
         }
     }
@@ -59,13 +92,12 @@ public class CubePhysics : MonoBehaviour
         if (collision.collider.CompareTag("Bullet"))
         {
             Destroy(collision.collider.gameObject);
+
             CubeExplode ce = GetComponent<CubeExplode>();
-            if (ce != null) ce.Explode();
+            if (ce != null)
+                ce.Explode();
             else
-            {
-                if (cubeSpawnManager != null) cubeSpawnManager.NotifyCubeDestroyed(gameObject);
-                Destroy(gameObject);
-            }
+                NotifyAndDestroy();
         }
     }
 
@@ -74,9 +106,21 @@ public class CubePhysics : MonoBehaviour
         speedMultiplier = m;
     }
 
+    private void NotifyAndDestroy()
+    {
+        if (cubeSpawnManager != null)
+        {
+            cubeSpawnManager.NotifyCubeDestroyed(gameObject);
+        }
+
+        Destroy(gameObject);
+    }
+
     void OnDestroy()
     {
         if (cubeSpawnManager != null)
+        {
             cubeSpawnManager.NotifyCubeDestroyed(gameObject);
+        }
     }
 }

@@ -1392,6 +1392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1005023592}
   - component: {fileID: 1005023593}
+  - component: {fileID: 1005023594}
   m_Layer: 0
   m_Name: Cube Spawn Manager
   m_TagString: Untagged
@@ -1432,14 +1433,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c07d8f31994f14c91ab9dcd6454d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CubeSpawnManager
-  spawnPoints:
-  - {fileID: 628099178}
-  - {fileID: 1147366002}
-  - {fileID: 2003897387}
-  - {fileID: 293038738}
-  - {fileID: 1779644973}
   gunCubePrefab: {fileID: 9220460230358506278, guid: f1044f83bc9ee9145b22f20847ceb742, type: 3}
   swordCubePrefab: {fileID: 784917196415359683, guid: b33d44cc0102bbb4db363d552a024fa0, type: 3}
+  waveManager: {fileID: 1005023594}
   progressBarFill: {fileID: 1259635496}
   progressBarOutline: {fileID: 758598237}
   textTime: {fileID: 1846573721}
@@ -1449,6 +1445,30 @@ MonoBehaviour:
   - {r: 1, g: 0.6, b: 0.2, a: 1}
   - {r: 1, g: 0.2, b: 0.2, a: 1}
   - {r: 0.7, g: 0.2, b: 1, a: 1}
+--- !u!114 &1005023594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005023590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f3428a590eb1c428e415af78019ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  specialIcons:
+  - {fileID: 21300000, guid: 610faaeab5fcef141815a69f5d642cd8, type: 3}
+  - {fileID: 21300000, guid: 3a3b159e540d74b4eaf58899530040e7, type: 3}
+  - {fileID: 21300000, guid: 20abbc0ce3a077e4fb8e946a97669de6, type: 3}
+  leftSpawnPoints:
+  - {fileID: 628099178}
+  - {fileID: 2003897387}
+  - {fileID: 1779644973}
+  rightSpawnPoints:
+  - {fileID: 1147366002}
+  - {fileID: 293038738}
+  - {fileID: 1779644973}
 --- !u!1 &1132402540
 GameObject:
   m_ObjectHideFlags: 0
