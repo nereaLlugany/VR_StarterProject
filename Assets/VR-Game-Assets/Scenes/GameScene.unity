@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 583533800}
   m_Layer: 0
   m_Name: CubeKiller
-  m_TagString: Untagged
+  m_TagString: CubeKiller
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1391,6 +1391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1005023592}
+  - component: {fileID: 1005023593}
   m_Layer: 0
   m_Name: Cube Spawn Manager
   m_TagString: Untagged
@@ -1419,6 +1420,35 @@ Transform:
   - {fileID: 583533795}
   m_Father: {fileID: 1985224027}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1005023593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005023590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c07d8f31994f14c91ab9dcd6454d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CubeSpawnManager
+  spawnPoints:
+  - {fileID: 628099178}
+  - {fileID: 1147366002}
+  - {fileID: 2003897387}
+  - {fileID: 293038738}
+  - {fileID: 1779644973}
+  gunCubePrefab: {fileID: 9220460230358506278, guid: f1044f83bc9ee9145b22f20847ceb742, type: 3}
+  swordCubePrefab: {fileID: 784917196415359683, guid: b33d44cc0102bbb4db363d552a024fa0, type: 3}
+  progressBarFill: {fileID: 1259635496}
+  progressBarOutline: {fileID: 758598237}
+  textTime: {fileID: 1846573721}
+  waveFillColors:
+  - {r: 0.2, g: 0.8, b: 0.2, a: 1}
+  - {r: 0.2, g: 0.6, b: 1, a: 1}
+  - {r: 1, g: 0.6, b: 0.2, a: 1}
+  - {r: 1, g: 0.2, b: 0.2, a: 1}
+  - {r: 0.7, g: 0.2, b: 1, a: 1}
 --- !u!1 &1132402540
 GameObject:
   m_ObjectHideFlags: 0
