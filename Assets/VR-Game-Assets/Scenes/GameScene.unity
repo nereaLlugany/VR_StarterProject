@@ -508,6 +508,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4568407160905173256, guid: 219b3db786e5a164286993fc260197c9, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9047720025326364693, guid: 219b3db786e5a164286993fc260197c9, type: 3}
       propertyPath: body
       value: 
@@ -553,7 +557,10 @@ PrefabInstance:
       insertIndex: 6
       addedObject: {fileID: 757544332}
     - targetCorrespondingSourceObject: {fileID: 3722040142409477729, guid: 219b3db786e5a164286993fc260197c9, type: 3}
-      insertIndex: 8
+      insertIndex: 7
+      addedObject: {fileID: 757544342}
+    - targetCorrespondingSourceObject: {fileID: 3722040142409477729, guid: 219b3db786e5a164286993fc260197c9, type: 3}
+      insertIndex: 9
       addedObject: {fileID: 757544334}
   m_SourcePrefab: {fileID: 100100000, guid: 219b3db786e5a164286993fc260197c9, type: 3}
 --- !u!1 &448433542
@@ -1014,6 +1021,12 @@ MonoBehaviour:
     m_Bits: 4294967295
   shootSound: {fileID: 8300000, guid: 56b55326d07c3a04c84a9e0cd1ac8dd1, type: 3}
   shootVolume: 1
+  gunAnimator: {fileID: 757544342}
+  shootTriggerName: Fire
+  leftHand: {fileID: 0}
+  localPositionOffset: {x: 0, y: 0, z: 0}
+  localEulerOffset: {x: 0, y: 0, z: 0}
+  shootKey: 102
 --- !u!114 &757544333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,6 +1080,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Autohand.CollisionTracker
   disableCollisionTracking: 0
   disableTriggersTracking: 1
+--- !u!95 &757544342
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757544322}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bfead1c2b463bf544a4496efd984a36b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &758598235
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,7 +2255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1489170611
 AudioListener:
   m_ObjectHideFlags: 0

@@ -50,7 +50,7 @@ public class CubePhysics : MonoBehaviour
         }
 
         Vector3 desiredVelocity = transform.forward * baseSpeed * speedMultiplier * globalMul;
-        rb.velocity = desiredVelocity;
+        rb.linearVelocity = desiredVelocity;
     }
 
     void OnTriggerEnter(Collider other)
