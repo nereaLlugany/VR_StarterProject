@@ -191,5 +191,10 @@ namespace Autohand.Demo
             if (gunAnimator != null)
                 gunAnimator.ResetTrigger(shootTriggerName);
         }
+
+        public void DestroyCube()
+        {
+            Destroy(gameObject);
+        }
     }
 }

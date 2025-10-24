@@ -31,7 +31,7 @@ public class CubeSpawnManager : MonoBehaviour
 
     private List<GameObject> activeCubes = new List<GameObject>();
 
-    private float totalElapsed = 0f;
+    private float totalElapsed = 60f;
     private const float MAX_TOTAL_SECONDS = 300f;
 
     void Start()

@@ -612,8 +612,6 @@ GameObject:
   - component: {fileID: 9047720025326364693}
   - component: {fileID: 4334405802767124476}
   - component: {fileID: 6706344067530582333}
-  - component: {fileID: 480404902}
-  - component: {fileID: 7437147876841395352}
   - component: {fileID: 6688958821030329708}
   - component: {fileID: 4025337965523839143}
   m_Layer: 0
@@ -1605,67 +1603,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.2, y: 0.2, z: 0.2}
   m_Center: {x: 0.4, y: -0.015, z: -0.48}
---- !u!114 &480404902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3722040142409477729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ddecfd57951984cb3fe8b722d3f68b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnGrabPressed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7437147876841395352}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Shoot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Bang!
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5709344812630162365}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &7437147876841395352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3722040142409477729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5aa5c06028015b45918ad5dbbefc548, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  body: {fileID: 0}
-  barrelTip: {fileID: 5439187510978164634}
-  hitPower: 1
-  recoilPower: 1
-  range: 50
-  layer:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  shootSound: {fileID: 8300000, guid: 56b55326d07c3a04c84a9e0cd1ac8dd1, type: 3}
-  shootVolume: 1
 --- !u!114 &6688958821030329708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3912,11 +3849,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dee54f9447b75347988b5f652a71830, type: 3}
---- !u!198 &5709344812630162365 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5709344813169478276, guid: 1dee54f9447b75347988b5f652a71830, type: 3}
-  m_PrefabInstance: {fileID: 539341113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8350002204579724382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8350002205114649959, guid: 1dee54f9447b75347988b5f652a71830, type: 3}
