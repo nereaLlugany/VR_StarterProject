@@ -30,6 +30,7 @@ TagManager:
   - QDSUIToggleCheckboxRadio
   - CubeKiller
   - Bullet
+  - Sword
   layers:
   - Default
   - TransparentFX
@@ -41,7 +42,7 @@ TagManager:
   - Grabbable
   - Hand
   - HandPlayer
-  - 
+  - Sliceable
   - 
   - 
   - 

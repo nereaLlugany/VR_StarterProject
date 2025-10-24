@@ -22,7 +22,7 @@ public class WaveManager : MonoBehaviour
     private bool swapSidesActive = false;
     private float swapSidesTimer = 0f;
 
-    void Start()
+    void Awake()
     {
         if (waves == null || waves.Length == 0)
         {
