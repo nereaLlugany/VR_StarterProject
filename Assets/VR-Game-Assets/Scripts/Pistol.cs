@@ -171,7 +171,14 @@ namespace Autohand.Demo
 
                 if (hit.transform.name.Contains("GunCube"))
                 {
-                    Destroy(hit.transform.gameObject);
+                    //Destroy(hit.transform.gameObject);
+                    CubeExplode cubeExplode = hit.transform.GetComponent<CubeExplode>();
+    
+                    if(cubeExplode != null)
+                    {
+                        // Cridem la funció Explode() del cub
+                        cubeExplode.Explode();
+                    }
                     
                 }
             }
