@@ -1085,6 +1085,59 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2085602575}
   m_SourcePrefab: {fileID: 100100000, guid: 835701cc56c15794caeb57249ccffae3, type: 3}
+--- !u!1 &734299198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 734299200}
+  - component: {fileID: 734299201}
+  m_Layer: 0
+  m_Name: SceneController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &734299200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734299198}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.38152, y: 1.63445, z: -1.99045}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &734299201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734299198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95dfbae917d65754091bef42fb3c5e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSceneController
+  Image_Background: {fileID: 1132402542}
+  TitleScore_Text: {fileID: 1957001179}
+  TitleHighScore_Text: {fileID: 1725085834}
+  FinalScore_Text: {fileID: 1409727138}
+  HighScore_Text: {fileID: 1721821175}
+  BackButton: {fileID: 1753229804}
+  Image_Background2: {fileID: 1303733964}
+  TitleScore_Text2: {fileID: 1534480906}
+  CurrentScore_Text: {fileID: 448433545}
 --- !u!1 &757544322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3722040142409477729, guid: 219b3db786e5a164286993fc260197c9, type: 3}
@@ -1119,6 +1172,7 @@ MonoBehaviour:
   hoverAmplitude: 0.15
   hoverSpeed: 1.2
   snapUpSpeed: 4
+  sceneController: {fileID: 734299201}
 --- !u!114 &757544333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4173,7 +4227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1489170611
 AudioListener:
   m_ObjectHideFlags: 0
@@ -5766,3 +5820,4 @@ SceneRoots:
   - {fileID: 380956085}
   - {fileID: 1703759944}
   - {fileID: 644015657}
+  - {fileID: 734299200}

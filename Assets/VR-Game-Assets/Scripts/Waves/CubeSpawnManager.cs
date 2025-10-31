@@ -33,6 +33,8 @@ public class CubeSpawnManager : MonoBehaviour
 
     private float totalElapsed = 60f;
     private const float MAX_TOTAL_SECONDS = 300f;
+    
+    [SerializeField] private GameSceneController sceneController;
 
     void Start()
     {
@@ -147,6 +149,8 @@ public class CubeSpawnManager : MonoBehaviour
     {
         if (cube == null) return;
         activeCubes.Remove(cube);
+        sceneController.Substract();
+        
     }
 
     public int GetActiveCubeCount() { return activeCubes.Count; }

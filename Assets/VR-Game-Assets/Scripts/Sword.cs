@@ -34,6 +34,7 @@ public class Sword : MonoBehaviour
     Vector3 lastPosition;
     Rigidbody bladeRb;
     Dictionary<GameObject, float> lastSliceTime = new Dictionary<GameObject, float>();
+    [SerializeField] private GameSceneController sceneController;
 
     class PieceState
     {
@@ -255,7 +256,7 @@ public class Sword : MonoBehaviour
             var ps = Instantiate(slashShinePrefab, planePoint, Quaternion.LookRotation(planeNormal));
             Destroy(ps.gameObject, 3.5f);
         }
-
+        sceneController.Sum();
         Destroy(target);
     }
 

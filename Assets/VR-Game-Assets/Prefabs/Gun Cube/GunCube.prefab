@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CubeExplode
   explosionPrefab: {fileID: 100040, guid: 5ffa061762077c44d92ba72a9866833e, type: 3}
-  explosionAutoDestroy: 2
+  explosionAutoDestroy: 1
 --- !u!114 &8099426783121124780
 MonoBehaviour:
   m_ObjectHideFlags: 0

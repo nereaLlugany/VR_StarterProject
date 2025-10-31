@@ -1,120 +1,353 @@
 fileFormatVersion: 2
 guid: 5ffa061762077c44d92ba72a9866833e
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Cube_Part_1
-    100002: Cube_Part_10
-    100004: Cube_Part_11
-    100006: Cube_Part_12
-    100008: Cube_Part_13
-    100010: Cube_Part_14
-    100012: Cube_Part_15
-    100014: Cube_Part_16
-    100016: Cube_Part_17
-    100018: Cube_Part_18
-    100020: Cube_Part_19
-    100022: Cube_Part_2
-    100024: Cube_Part_20
-    100026: Cube_Part_3
-    100028: Cube_Part_4
-    100030: Cube_Part_5
-    100032: Cube_Part_6
-    100034: Cube_Part_7
-    100036: Cube_Part_8
-    100038: Cube_Part_9
-    100040: //RootNode
-    400000: Cube_Part_1
-    400002: Cube_Part_10
-    400004: Cube_Part_11
-    400006: Cube_Part_12
-    400008: Cube_Part_13
-    400010: Cube_Part_14
-    400012: Cube_Part_15
-    400014: Cube_Part_16
-    400016: Cube_Part_17
-    400018: Cube_Part_18
-    400020: Cube_Part_19
-    400022: Cube_Part_2
-    400024: Cube_Part_20
-    400026: Cube_Part_3
-    400028: Cube_Part_4
-    400030: Cube_Part_5
-    400032: Cube_Part_6
-    400034: Cube_Part_7
-    400036: Cube_Part_8
-    400038: Cube_Part_9
-    400040: //RootNode
-    2100000: CubeMetalFrame
-    2100002: CubeFaces
-    2100004: CubeSlice
-    2300000: Cube_Part_1
-    2300002: Cube_Part_10
-    2300004: Cube_Part_11
-    2300006: Cube_Part_12
-    2300008: Cube_Part_13
-    2300010: Cube_Part_14
-    2300012: Cube_Part_15
-    2300014: Cube_Part_16
-    2300016: Cube_Part_17
-    2300018: Cube_Part_18
-    2300020: Cube_Part_19
-    2300022: Cube_Part_2
-    2300024: Cube_Part_20
-    2300026: Cube_Part_3
-    2300028: Cube_Part_4
-    2300030: Cube_Part_5
-    2300032: Cube_Part_6
-    2300034: Cube_Part_7
-    2300036: Cube_Part_8
-    2300038: Cube_Part_9
-    3300000: Cube_Part_1
-    3300002: Cube_Part_10
-    3300004: Cube_Part_11
-    3300006: Cube_Part_12
-    3300008: Cube_Part_13
-    3300010: Cube_Part_14
-    3300012: Cube_Part_15
-    3300014: Cube_Part_16
-    3300016: Cube_Part_17
-    3300018: Cube_Part_18
-    3300020: Cube_Part_19
-    3300022: Cube_Part_2
-    3300024: Cube_Part_20
-    3300026: Cube_Part_3
-    3300028: Cube_Part_4
-    3300030: Cube_Part_5
-    3300032: Cube_Part_6
-    3300034: Cube_Part_7
-    3300036: Cube_Part_8
-    3300038: Cube_Part_9
-    4300000: Cube_Part_1
-    4300002: Cube_Part_2
-    4300004: Cube_Part_3
-    4300006: Cube_Part_4
-    4300008: Cube_Part_5
-    4300010: Cube_Part_6
-    4300012: Cube_Part_7
-    4300014: Cube_Part_8
-    4300016: Cube_Part_9
-    4300018: Cube_Part_10
-    4300020: Cube_Part_11
-    4300022: Cube_Part_12
-    4300024: Cube_Part_13
-    4300026: Cube_Part_14
-    4300028: Cube_Part_15
-    4300030: Cube_Part_16
-    4300032: Cube_Part_17
-    4300034: Cube_Part_18
-    4300036: Cube_Part_19
-    4300038: Cube_Part_20
-    7400000: shatter
-    9500000: //RootNode
-    11100000: //RootNode
-    2186277476908879412: ImportLogs
-  externalObjects: {}
+  serializedVersion: 24200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Cube_Part_1
+  - first:
+      1: 100002
+    second: Cube_Part_10
+  - first:
+      1: 100004
+    second: Cube_Part_11
+  - first:
+      1: 100006
+    second: Cube_Part_12
+  - first:
+      1: 100008
+    second: Cube_Part_13
+  - first:
+      1: 100010
+    second: Cube_Part_14
+  - first:
+      1: 100012
+    second: Cube_Part_15
+  - first:
+      1: 100014
+    second: Cube_Part_16
+  - first:
+      1: 100016
+    second: Cube_Part_17
+  - first:
+      1: 100018
+    second: Cube_Part_18
+  - first:
+      1: 100020
+    second: Cube_Part_19
+  - first:
+      1: 100022
+    second: Cube_Part_2
+  - first:
+      1: 100024
+    second: Cube_Part_20
+  - first:
+      1: 100026
+    second: Cube_Part_3
+  - first:
+      1: 100028
+    second: Cube_Part_4
+  - first:
+      1: 100030
+    second: Cube_Part_5
+  - first:
+      1: 100032
+    second: Cube_Part_6
+  - first:
+      1: 100034
+    second: Cube_Part_7
+  - first:
+      1: 100036
+    second: Cube_Part_8
+  - first:
+      1: 100038
+    second: Cube_Part_9
+  - first:
+      1: 100040
+    second: //RootNode
+  - first:
+      4: 400000
+    second: Cube_Part_1
+  - first:
+      4: 400002
+    second: Cube_Part_10
+  - first:
+      4: 400004
+    second: Cube_Part_11
+  - first:
+      4: 400006
+    second: Cube_Part_12
+  - first:
+      4: 400008
+    second: Cube_Part_13
+  - first:
+      4: 400010
+    second: Cube_Part_14
+  - first:
+      4: 400012
+    second: Cube_Part_15
+  - first:
+      4: 400014
+    second: Cube_Part_16
+  - first:
+      4: 400016
+    second: Cube_Part_17
+  - first:
+      4: 400018
+    second: Cube_Part_18
+  - first:
+      4: 400020
+    second: Cube_Part_19
+  - first:
+      4: 400022
+    second: Cube_Part_2
+  - first:
+      4: 400024
+    second: Cube_Part_20
+  - first:
+      4: 400026
+    second: Cube_Part_3
+  - first:
+      4: 400028
+    second: Cube_Part_4
+  - first:
+      4: 400030
+    second: Cube_Part_5
+  - first:
+      4: 400032
+    second: Cube_Part_6
+  - first:
+      4: 400034
+    second: Cube_Part_7
+  - first:
+      4: 400036
+    second: Cube_Part_8
+  - first:
+      4: 400038
+    second: Cube_Part_9
+  - first:
+      4: 400040
+    second: //RootNode
+  - first:
+      21: 2100000
+    second: CubeMetalFrame
+  - first:
+      21: 2100002
+    second: CubeFaces
+  - first:
+      21: 2100004
+    second: CubeSlice
+  - first:
+      23: 2300000
+    second: Cube_Part_1
+  - first:
+      23: 2300002
+    second: Cube_Part_10
+  - first:
+      23: 2300004
+    second: Cube_Part_11
+  - first:
+      23: 2300006
+    second: Cube_Part_12
+  - first:
+      23: 2300008
+    second: Cube_Part_13
+  - first:
+      23: 2300010
+    second: Cube_Part_14
+  - first:
+      23: 2300012
+    second: Cube_Part_15
+  - first:
+      23: 2300014
+    second: Cube_Part_16
+  - first:
+      23: 2300016
+    second: Cube_Part_17
+  - first:
+      23: 2300018
+    second: Cube_Part_18
+  - first:
+      23: 2300020
+    second: Cube_Part_19
+  - first:
+      23: 2300022
+    second: Cube_Part_2
+  - first:
+      23: 2300024
+    second: Cube_Part_20
+  - first:
+      23: 2300026
+    second: Cube_Part_3
+  - first:
+      23: 2300028
+    second: Cube_Part_4
+  - first:
+      23: 2300030
+    second: Cube_Part_5
+  - first:
+      23: 2300032
+    second: Cube_Part_6
+  - first:
+      23: 2300034
+    second: Cube_Part_7
+  - first:
+      23: 2300036
+    second: Cube_Part_8
+  - first:
+      23: 2300038
+    second: Cube_Part_9
+  - first:
+      33: 3300000
+    second: Cube_Part_1
+  - first:
+      33: 3300002
+    second: Cube_Part_10
+  - first:
+      33: 3300004
+    second: Cube_Part_11
+  - first:
+      33: 3300006
+    second: Cube_Part_12
+  - first:
+      33: 3300008
+    second: Cube_Part_13
+  - first:
+      33: 3300010
+    second: Cube_Part_14
+  - first:
+      33: 3300012
+    second: Cube_Part_15
+  - first:
+      33: 3300014
+    second: Cube_Part_16
+  - first:
+      33: 3300016
+    second: Cube_Part_17
+  - first:
+      33: 3300018
+    second: Cube_Part_18
+  - first:
+      33: 3300020
+    second: Cube_Part_19
+  - first:
+      33: 3300022
+    second: Cube_Part_2
+  - first:
+      33: 3300024
+    second: Cube_Part_20
+  - first:
+      33: 3300026
+    second: Cube_Part_3
+  - first:
+      33: 3300028
+    second: Cube_Part_4
+  - first:
+      33: 3300030
+    second: Cube_Part_5
+  - first:
+      33: 3300032
+    second: Cube_Part_6
+  - first:
+      33: 3300034
+    second: Cube_Part_7
+  - first:
+      33: 3300036
+    second: Cube_Part_8
+  - first:
+      33: 3300038
+    second: Cube_Part_9
+  - first:
+      43: 4300000
+    second: Cube_Part_1
+  - first:
+      43: 4300002
+    second: Cube_Part_2
+  - first:
+      43: 4300004
+    second: Cube_Part_3
+  - first:
+      43: 4300006
+    second: Cube_Part_4
+  - first:
+      43: 4300008
+    second: Cube_Part_5
+  - first:
+      43: 4300010
+    second: Cube_Part_6
+  - first:
+      43: 4300012
+    second: Cube_Part_7
+  - first:
+      43: 4300014
+    second: Cube_Part_8
+  - first:
+      43: 4300016
+    second: Cube_Part_9
+  - first:
+      43: 4300018
+    second: Cube_Part_10
+  - first:
+      43: 4300020
+    second: Cube_Part_11
+  - first:
+      43: 4300022
+    second: Cube_Part_12
+  - first:
+      43: 4300024
+    second: Cube_Part_13
+  - first:
+      43: 4300026
+    second: Cube_Part_14
+  - first:
+      43: 4300028
+    second: Cube_Part_15
+  - first:
+      43: 4300030
+    second: Cube_Part_16
+  - first:
+      43: 4300032
+    second: Cube_Part_17
+  - first:
+      43: 4300034
+    second: Cube_Part_18
+  - first:
+      43: 4300036
+    second: Cube_Part_19
+  - first:
+      43: 4300038
+    second: Cube_Part_20
+  - first:
+      74: 7400000
+    second: shatter
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      111: 11100000
+    second: //RootNode
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CubeFaces
+    second: {fileID: 2100000, guid: 92ba2e9b907229b4da4f2d6fde23225c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CubeMetalFrame
+    second: {fileID: 2100000, guid: 92ba2e9b907229b4da4f2d6fde23225c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CubeSlice
+    second: {fileID: 2100000, guid: 92ba2e9b907229b4da4f2d6fde23225c, type: 2}
   materials:
-    importMaterials: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -123,9 +356,8 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -143,6 +375,7 @@ ModelImporter:
     - serializedVersion: 16
       name: shatter
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 30
       wrapMode: 0
@@ -175,25 +408,39 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -202,10 +449,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -215,13 +462,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 1
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

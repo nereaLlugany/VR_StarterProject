@@ -3,7 +3,7 @@ using UnityEngine;
 public class CubeExplode : MonoBehaviour
 {
     public GameObject explosionPrefab;
-    public float explosionAutoDestroy = 2f;
+    public float explosionAutoDestroy = 0.1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -34,6 +34,8 @@ namespace Autohand.Demo
         private bool isHovering = false;
         private Vector3 hoverBasePosition;
         private Coroutine hoverCoroutine;
+        
+        [SerializeField] private GameSceneController sceneController;
 
         private void Start()
         {
@@ -178,6 +180,8 @@ namespace Autohand.Demo
                     {
                         // Cridem la funció Explode() del cub
                         cubeExplode.Explode();
+                        sceneController.Sum();
+                        
                     }
                     
                 }
