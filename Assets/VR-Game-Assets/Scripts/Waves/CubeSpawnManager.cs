@@ -34,7 +34,7 @@ public class CubeSpawnManager : MonoBehaviour
     private float totalElapsed = 60f;
     private const float MAX_TOTAL_SECONDS = 300f;
     
-    r;
+    
 
     void Start()
     {
