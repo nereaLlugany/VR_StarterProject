@@ -34,7 +34,7 @@ public class CubeSpawnManager : MonoBehaviour
     private float totalElapsed = 60f;
     private const float MAX_TOTAL_SECONDS = 300f;
     
-    [SerializeField] private GameSceneController sceneController;
+    r;
 
     void Start()
     {
@@ -76,6 +76,11 @@ public class CubeSpawnManager : MonoBehaviour
         float waveDur = waveManager.GetWaveDuration();
         float remaining = waveDur > 0f ? Mathf.Clamp01(1f - (waveElapsed / waveDur)) : 0f;
         UpdateWaveProgressUI(remaining);
+        
+
+      
+        
+
 
         if (progressBarFill != null)
         {
@@ -149,7 +154,7 @@ public class CubeSpawnManager : MonoBehaviour
     {
         if (cube == null) return;
         activeCubes.Remove(cube);
-        sceneController.Substract();
+        
         
     }
 

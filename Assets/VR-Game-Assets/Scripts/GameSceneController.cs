@@ -33,15 +33,36 @@ public class GameSceneController : MonoBehaviour
 
     public void Sum()
     {
+        
+        Debug.Log("Sum");
         currentScore += 1;
         if (CurrentScore_Text != null)
             CurrentScore_Text.text = currentScore.ToString();
+        
+        Debug.Log(currentScore);
     }
     
     public void Substract()
     {
+        
         currentScore -= 1;
         if (CurrentScore_Text != null)
             CurrentScore_Text.text = currentScore.ToString();
+        Debug.Log("Subs: " + currentScore);
+    }
+
+    public void EndGame()
+    {
+        Image_Background.enabled = true;
+        TitleScore_Text.enabled = true;
+        TitleHighScore_Text.enabled = true;
+        FinalScore_Text.enabled = true;
+        HighScore_Text.enabled = true;
+        BackButton.SetActive(true);
+        
+        
+        Image_Background2.enabled = false;
+        TitleScore_Text2.enabled = false;
+        CurrentScore_Text.enabled = false;
     }
 }
