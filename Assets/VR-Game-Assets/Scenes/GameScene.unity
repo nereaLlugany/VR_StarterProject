@@ -1122,8 +1122,8 @@ MonoBehaviour:
   TitleScore_Text2: {fileID: 1534480906}
   CurrentScore_Text: {fileID: 448433545}
   isFinished: 0
-  cubeSpawnManager: {fileID: 0}
-  waveManager: {fileID: 0}
+  cubeSpawnManager: {fileID: 1005023593}
+  waveManager: {fileID: 1005023594}
 --- !u!1 &757544322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3722040142409477729, guid: 219b3db786e5a164286993fc260197c9, type: 3}
