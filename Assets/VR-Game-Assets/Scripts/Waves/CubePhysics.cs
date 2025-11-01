@@ -61,16 +61,6 @@ public class CubePhysics : MonoBehaviour
             return;
         }
 
-        if (other.CompareTag("Player"))
-        {
-            SpecialCube sc = GetComponent<SpecialCube>();
-            if (sc != null)
-            {
-                sc.Activate();
-                return;
-            }
-        }
-
         if (other.CompareTag("Bullet"))
         {
             Destroy(other.gameObject);

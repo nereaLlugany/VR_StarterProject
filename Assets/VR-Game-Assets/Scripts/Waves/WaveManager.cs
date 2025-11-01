@@ -9,6 +9,9 @@ public class WaveManager : MonoBehaviour
     [Header("Special icons (3): 0 = slow, 1 = fast, 2 = swap")]
     public Sprite[] specialIcons = new Sprite[3];
 
+    [Header("Controllers")]
+    public GameSceneController gameSceneController;
+
     [Header("Spawn sides (configure Transforms)")]
     public Transform[] leftSpawnPoints;
     public Transform[] rightSpawnPoints;
@@ -21,6 +24,10 @@ public class WaveManager : MonoBehaviour
 
     private bool swapSidesActive = false;
     private float swapSidesTimer = 0f;
+    private float nextSpawnInterval = 2f;
+    private bool wavesFinishedFired = false;
+
+    private bool frozen = false;
 
     void Awake()
     {
@@ -105,33 +112,60 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        waveTimer += Time.deltaTime;
+        if (frozen) return;
 
-        if (globalSpeedTimer > 0f)
+    if (gameSceneController != null && gameSceneController.GetIsFinished())
+    {
+        FreezeTimers();
+        return;
+    }
+
+    waveTimer += Time.deltaTime;
+
+    if (globalSpeedTimer > 0f)
+    {
+        globalSpeedTimer -= Time.deltaTime;
+        if (globalSpeedTimer <= 0f)
         {
-            globalSpeedTimer -= Time.deltaTime;
-            if (globalSpeedTimer <= 0f)
-            {
-                globalSpeedMultiplier = 1f;
-            }
+            globalSpeedMultiplier = 1f;
+            globalSpeedTimer = 0f;
         }
+    }
 
-        if (swapSidesTimer > 0f)
+    if (swapSidesTimer > 0f)
+    {
+        swapSidesTimer -= Time.deltaTime;
+        if (swapSidesTimer <= 0f)
         {
-            swapSidesTimer -= Time.deltaTime;
-            if (swapSidesTimer <= 0f)
-            {
-                swapSidesActive = false;
-            }
+            swapSidesActive = false;
+            swapSidesTimer = 0f;
         }
+    }
 
-        if (waveTimer >= waves[currentWave].duration)
+    if (waveTimer >= waves[currentWave].duration)
+    {
+        waveTimer = 0f;
+
+        if (currentWave < waves.Length - 1)
         {
-            waveTimer = 0f;
             currentWave++;
-            if (currentWave >= waves.Length)
-                currentWave = waves.Length - 1;
         }
+        else
+        {
+            NotifyWavesFinished();
+            currentWave = waves.Length - 1;
+        }
+    }
+    }
+
+    public void FreezeTimers()
+    {
+        if (frozen) return;
+        frozen = true;
+
+        waveTimer = Mathf.Min(waveTimer, GetWaveDuration());
+        globalSpeedTimer = 0f;
+        swapSidesTimer = 0f;
     }
 
     public Wave GetCurrentWave()
@@ -183,9 +217,35 @@ public class WaveManager : MonoBehaviour
         swapSidesTimer = duration;
     }
 
-    public int GetCurrentWaveIndex() { return currentWave; }
-    public float GetWaveElapsed() { return waveTimer; }
-    public float GetWaveDuration() { return waves != null && waves.Length > 0 ? waves[currentWave].duration : 0f; }
+    public int GetCurrentWaveIndex()
+    {
+        return currentWave;
+    }
+
+    public float GetWaveElapsed()
+    {
+        return waveTimer;
+    }
+
+    public float GetWaveDuration()
+    {
+        return waves != null && waves.Length > 0 ? waves[currentWave].duration : 0f;
+    }
+
+    public void NotifyWavesFinished()
+    {
+        wavesFinishedFired = true;
+
+        if (gameSceneController == null)
+        {
+            gameSceneController = FindObjectOfType<GameSceneController>();
+        }
+
+        if (gameSceneController != null)
+        {
+            gameSceneController.SetIsFinished(wavesFinishedFired);
+        }
+    }
 }
 
 public class Wave

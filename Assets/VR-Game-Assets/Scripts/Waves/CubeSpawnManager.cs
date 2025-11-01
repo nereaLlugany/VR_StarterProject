@@ -31,10 +31,10 @@ public class CubeSpawnManager : MonoBehaviour
 
     private List<GameObject> activeCubes = new List<GameObject>();
 
-    private float totalElapsed = 60f;
+    private float totalElapsed = 0f;
     private const float MAX_TOTAL_SECONDS = 300f;
     
-    
+    private bool frozen = false;
 
     void Start()
     {
@@ -66,6 +66,21 @@ public class CubeSpawnManager : MonoBehaviour
     {
         if (waveManager == null) return;
 
+        if (frozen || (waveManager.gameSceneController != null && waveManager.gameSceneController.GetIsFinished()))
+        {
+            if (progressBarFill != null)
+                progressBarFill.fillAmount = 0f;
+            if (progressBarOutline != null)
+                progressBarOutline.color = DarkenColor(GetColorForWave(waveManager.GetCurrentWaveIndex()), 0.5f);
+
+            if (textTime != null && totalElapsed < 300f)
+            {
+                totalElapsed = 300f;
+                UpdateElapsedText(totalElapsed);
+            }
+            return;
+        }
+
         Wave w = waveManager.GetCurrentWave();
 
         spawnTimer += Time.deltaTime;
@@ -76,11 +91,6 @@ public class CubeSpawnManager : MonoBehaviour
         float waveDur = waveManager.GetWaveDuration();
         float remaining = waveDur > 0f ? Mathf.Clamp01(1f - (waveElapsed / waveDur)) : 0f;
         UpdateWaveProgressUI(remaining);
-        
-
-      
-        
-
 
         if (progressBarFill != null)
         {
@@ -102,7 +112,28 @@ public class CubeSpawnManager : MonoBehaviour
             }
         }
     }
+    
+    public void FreezeAll(bool showFiveMinutesOnTimer = false)
+    {
+        if (frozen) return;
+        frozen = true;
 
+        spawnTimer = 0f;
+        nextSpawnInterval = float.MaxValue;
+
+        if (showFiveMinutesOnTimer)
+        {
+            totalElapsed = 300f; 
+        }
+
+        if (progressBarFill != null)
+            progressBarFill.fillAmount = 0f;
+        if (progressBarOutline != null)
+            progressBarOutline.color = DarkenColor(GetColorForWave(waveManager.GetCurrentWaveIndex()), 0.5f);
+
+        if (textTime != null)
+            UpdateElapsedText(totalElapsed);
+    }
     private void SpawnOne(Wave w)
     {
         bool makeSpecial = w.introduceSpecialCubes && Random.value <= w.specialChance;
