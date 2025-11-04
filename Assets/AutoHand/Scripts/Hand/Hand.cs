@@ -1223,5 +1223,9 @@ namespace Autohand {
             }
         }
 
+        public void TryHapticImpulse(int v1, int v2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
