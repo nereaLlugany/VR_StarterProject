@@ -34,8 +34,11 @@ namespace Autohand.Demo
         private bool isHovering = false;
         private Vector3 hoverBasePosition;
         private Coroutine hoverCoroutine;
-        
+
         [SerializeField] private GameSceneController sceneController;
+
+        private Hand currentHand;
+
 
         private void Start()
         {
@@ -65,6 +68,8 @@ namespace Autohand.Demo
         // ---------------------- Eventos de agarre / soltar ----------------------
         private void OnGrabbed(Hand hand, Grabbable grab)
         {
+
+            currentHand = hand;
             // Cuando alguien la agarra, detenemos el flotado y restauramos física normal
             StopHovering();
 
@@ -78,6 +83,9 @@ namespace Autohand.Demo
 
         private void OnReleased(Hand hand, Grabbable grab)
         {
+
+            if (currentHand == hand)
+                currentHand = null; // deixem de recordar la mà
             // Cuando la sueltan, la dejamos flotando (si está habilitado)
             if (!floatOnRelease) return;
 
@@ -143,57 +151,63 @@ namespace Autohand.Demo
         // ---------------------- Disparo ----------------------
         public void Shoot()
         {
-            // Si la pistola está kinematic (flotando), permite disparar igualmente
-            if (shootSound)
-                AudioSource.PlayClipAtPoint(shootSound, transform.position, shootVolume);
 
-            if (gunAnimator != null)
+
+            if (grabbable != null)
             {
-                gunAnimator.SetTrigger(shootTriggerName);
-                StartCoroutine(ResetTrigger());
-            }
 
-            RaycastHit hit;
-            if (barrelTip == null)
-            {
-                Debug.LogWarning("[Pistol] barrelTip no asignado.");
-                return;
-            }
+                // Si la pistola está kinematic (flotando), permite disparar igualmente
+                if (shootSound)
+                    AudioSource.PlayClipAtPoint(shootSound, transform.position, shootVolume);
 
-            if (Physics.Raycast(barrelTip.position, barrelTip.forward, out hit, range, layer))
-            {
-                Debug.DrawRay(barrelTip.position, (hit.point - barrelTip.position), Color.green, 2f);
-
-                var hitBody = hit.transform.GetComponent<Rigidbody>();
-                if (hitBody != null)
+                if (gunAnimator != null)
                 {
-                    hitBody.GetComponent<Smash>()?.DoSmash();
-                    hitBody.AddForceAtPosition((hit.point - barrelTip.position).normalized * hitPower * 10, hit.point, ForceMode.Impulse);
+                    gunAnimator.SetTrigger(shootTriggerName);
+                    StartCoroutine(ResetTrigger());
                 }
 
-                if (hit.transform.name.Contains("GunCube"))
+                RaycastHit hit;
+                if (barrelTip == null)
                 {
-                    //Destroy(hit.transform.gameObject);
-                    CubeExplode cubeExplode = hit.transform.GetComponent<CubeExplode>();
-    
-                    if(cubeExplode != null)
+                    Debug.LogWarning("[Pistol] barrelTip no asignado.");
+                    return;
+                }
+
+                if (Physics.Raycast(barrelTip.position, barrelTip.forward, out hit, range, layer))
+                {
+                    Debug.DrawRay(barrelTip.position, (hit.point - barrelTip.position), Color.green, 2f);
+
+                    var hitBody = hit.transform.GetComponent<Rigidbody>();
+                    if (hitBody != null)
                     {
-                        // Cridem la funció Explode() del cub
-                        cubeExplode.Explode();
-                        sceneController.Sum();
-                        
+                        hitBody.GetComponent<Smash>()?.DoSmash();
+                        hitBody.AddForceAtPosition((hit.point - barrelTip.position).normalized * hitPower * 10, hit.point, ForceMode.Impulse);
                     }
-                    
-                }
-            }
-            else
-            {
-                Debug.DrawRay(barrelTip.position, barrelTip.forward * range, Color.red, 1f);
-            }
 
-            // Recoil: si el rigidbody existe y no es kinematic, aplica fuerza real; de lo contrario puedes animar el retroceso
-            if (body != null && !body.isKinematic)
-                body.AddForce(barrelTip.transform.up * recoilPower * 5, ForceMode.Impulse);
+                    if (hit.transform.name.Contains("GunCube"))
+                    {
+                        //Destroy(hit.transform.gameObject);
+                        CubeExplode cubeExplode = hit.transform.GetComponent<CubeExplode>();
+
+                        if (cubeExplode != null)
+                        {
+                            // Cridem la funció Explode() del cub
+                            cubeExplode.Explode();
+                            sceneController.Sum();
+                            
+                        }
+
+                    }
+                }
+                else
+                {
+                    Debug.DrawRay(barrelTip.position, barrelTip.forward * range, Color.red, 1f);
+                }
+
+                // Recoil: si el rigidbody existe y no es kinematic, aplica fuerza real; de lo contrario puedes animar el retroceso
+                if (body != null && !body.isKinematic)
+                    body.AddForce(barrelTip.transform.up * recoilPower * 5, ForceMode.Impulse);
+            }
         }
 
         private IEnumerator ResetTrigger()

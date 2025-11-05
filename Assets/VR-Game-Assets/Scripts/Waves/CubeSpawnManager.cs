@@ -17,6 +17,8 @@ public class CubeSpawnManager : MonoBehaviour
     public Image progressBarOutline;
     public TMP_Text textTime;
 
+    
+
     [Header("Wave colors (optional)")]
     public Color[] waveFillColors = new Color[] {
         new Color(0.2f, 0.8f, 0.2f), // green
@@ -185,6 +187,9 @@ public class CubeSpawnManager : MonoBehaviour
     {
         if (cube == null) return;
         activeCubes.Remove(cube);
+        
+
+        
         
         
     }
