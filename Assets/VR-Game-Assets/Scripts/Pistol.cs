@@ -9,7 +9,7 @@ namespace Autohand.Demo
         [Header("Componentes")]
         public Rigidbody body;
         public Transform barrelTip;
-        public Grabbable grabbable; // opcional (AutoHand)
+        public Grabbable grabbable; 
 
         [Header("Disparo")]
         public float hitPower = 1;
@@ -26,10 +26,10 @@ namespace Autohand.Demo
         public string shootTriggerName = "Fire";
 
         [Header("Flotar al soltar")]
-        public bool floatOnRelease = true;          // activar/desactivar funcionalidad
-        public float hoverAmplitude = 0.15f;       // altura máxima de la oscilación
-        public float hoverSpeed = 1.2f;            // velocidad de oscilación
-        public float snapUpSpeed = 4f;            // velocidad para corregir a la altura objetivo al iniciar hover
+        public bool floatOnRelease = true;          
+        public float hoverAmplitude = 0.15f;       
+        public float hoverSpeed = 1.2f;            
+        public float snapUpSpeed = 4f;            
 
         private bool isHovering = false;
         private Vector3 hoverBasePosition;
@@ -48,7 +48,7 @@ namespace Autohand.Demo
             if (grabbable == null)
                 grabbable = GetComponent<Grabbable>();
 
-            // Si existe Grabbable (AutoHand), nos suscribimos a eventos
+            
             if (grabbable != null)
             {
                 grabbable.OnGrabEvent += OnGrabbed;
@@ -65,17 +65,17 @@ namespace Autohand.Demo
             }
         }
 
-        // ---------------------- Eventos de agarre / soltar ----------------------
+        
         private void OnGrabbed(Hand hand, Grabbable grab)
         {
 
             currentHand = hand;
-            // Cuando alguien la agarra, detenemos el flotado y restauramos física normal
+            
             StopHovering();
 
             if (body != null)
             {
-                // permitimos que la física la controle mientras la mano la tiene (si corresponde)
+                
                 body.isKinematic = false;
                 body.useGravity = true;
             }
@@ -85,16 +85,14 @@ namespace Autohand.Demo
         {
 
             if (currentHand == hand)
-                currentHand = null; // deixem de recordar la mà
-            // Cuando la sueltan, la dejamos flotando (si está habilitado)
+                currentHand = null; 
+            
             if (!floatOnRelease) return;
-
-            // Guardamos la posición base para el hover (posición actual)
             hoverBasePosition = transform.position;
 
             if (body != null)
             {
-                // Desactivamos gravedad y hacemos kinematic para que no caiga
+                
                 body.linearVelocity = Vector3.zero;
                 body.angularVelocity = Vector3.zero;
                 body.useGravity = false;
@@ -123,12 +121,12 @@ namespace Autohand.Demo
 
         private IEnumerator HoverRoutine()
         {
-            // Nos aseguramos de que la pistola suba suavemente a la altura base + amplitude
+            
             float t = 0f;
             float startY = transform.position.y;
-            float targetY = hoverBasePosition.y + hoverAmplitude * 0.5f; // ligero snap hacia una altura agradable
+            float targetY = hoverBasePosition.y + hoverAmplitude * 0.5f; 
 
-            // fase de "snap up" para corregir bruscos
+            
             while (t < 1f)
             {
                 t += Time.deltaTime * snapUpSpeed;
@@ -137,7 +135,7 @@ namespace Autohand.Demo
                 yield return null;
             }
 
-            // Oscilación continua
+            
             float elapsed = 0f;
             while (isHovering)
             {
@@ -148,7 +146,7 @@ namespace Autohand.Demo
             }
         }
 
-        // ---------------------- Disparo ----------------------
+        // ---------------------- Disparar ----------------------
         public void Shoot()
         {
 
@@ -156,7 +154,7 @@ namespace Autohand.Demo
             if (grabbable != null)
             {
 
-                // Si la pistola está kinematic (flotando), permite disparar igualmente
+                
                 if (shootSound)
                     AudioSource.PlayClipAtPoint(shootSound, transform.position, shootVolume);
 
@@ -204,7 +202,7 @@ namespace Autohand.Demo
                     Debug.DrawRay(barrelTip.position, barrelTip.forward * range, Color.red, 1f);
                 }
 
-                // Recoil: si el rigidbody existe y no es kinematic, aplica fuerza real; de lo contrario puedes animar el retroceso
+                
                 if (body != null && !body.isKinematic)
                     body.AddForce(barrelTip.transform.up * recoilPower * 5, ForceMode.Impulse);
             }

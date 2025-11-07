@@ -35,6 +35,8 @@ public class Sword : MonoBehaviour
     Rigidbody bladeRb;
     Dictionary<GameObject, float> lastSliceTime = new Dictionary<GameObject, float>();
     [SerializeField] private GameSceneController sceneController;
+    
+    public AudioSource audioSource;
 
     class PieceState
     {
@@ -256,8 +258,15 @@ public class Sword : MonoBehaviour
             var ps = Instantiate(slashShinePrefab, planePoint, Quaternion.LookRotation(planeNormal));
             Destroy(ps.gameObject, 3.5f);
         }
+        
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.PlayOneShot(audioSource.clip);
+        }
+
         sceneController.Sum();
         Destroy(target);
+        
     }
 
     void SetupPiece(GameObject piece, GameObject original)

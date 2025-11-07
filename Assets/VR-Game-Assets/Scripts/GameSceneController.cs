@@ -2,6 +2,7 @@ using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; 
 
 public class GameSceneController : MonoBehaviour
 {
@@ -63,11 +64,14 @@ public class GameSceneController : MonoBehaviour
     
     public void Substract()
     {
+        if (currentScore > 0)
+        {
+            currentScore -= 1;
+            if (CurrentScore_Text != null)
+                CurrentScore_Text.text = currentScore.ToString();
+            Debug.Log("Subs: " + currentScore);
+        }
         
-        currentScore -= 1;
-        if (CurrentScore_Text != null)
-            CurrentScore_Text.text = currentScore.ToString();
-        Debug.Log("Subs: " + currentScore);
     }
 
     public void EndGame()
@@ -105,7 +109,14 @@ public class GameSceneController : MonoBehaviour
         {
             cubeSpawnManager.FreezeAll(showFiveMinutesOnTimer: true);
         }
+        
+        
 
+    }
+
+    public void GoLobby()
+    {
+        SceneManager.LoadScene(0); 
     }
 
     public void SetIsFinished(bool state)
